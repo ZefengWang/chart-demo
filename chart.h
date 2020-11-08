@@ -38,5 +38,7 @@ private:
     qint32 count;
     qint32 max;
     qint32 step;
+    qint32 time_step;
+    qint32 width;
 };
 #endif // CHART_H
