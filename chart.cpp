@@ -62,16 +62,15 @@ Chart::~Chart()
 
 void Chart::generateData()
 {
-    count +=1;// count*step >= max? -max/step: count+1 ;
-    lineSeries0->append(lineSeries0->count() +1, (max*2/step)*((count%step >step/2)? count%step-step:count %step ));
-    lineSeries1->append(lineSeries1->count() +1, 1000*qCos(count*M_PI/2.0)*qSin(((count%step)/(1.0*step)) *2*M_PI) );
-    valueAxisX->setRange(lineSeries1->count() -width , lineSeries1->count());
-    if (lineSeries0->count()>width) {
+    count +=1;
+
+    lineSeries0->append(count+1 , (max*2/step)*((count%step >step/2)? count%step-step:count %step ));
+    lineSeries1->append(count+1 , 1000*qCos(count*M_PI/2.0)*qSin(((count%step)/(1.0*step)) *2*M_PI) );
+    if (count>width) {
         lineSeries0->remove(0);
-    }
-    if (lineSeries1->count()>width) {
         lineSeries1->remove(0);
     }
+    valueAxisX->setRange(count-width, count);
 }
 
 void Chart::processButtonToggled(bool flag)
